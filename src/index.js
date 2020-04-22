@@ -98,8 +98,19 @@ module.exports = () => ({
     } else {
       this.tableReports += result;
     }
-
     this.tableReports += '</td>\n';
+    // Screenshots
+    if (testRunInfo.screenshots) {
+      this.tableReports += this.indentString('<td>', 2);
+      testRunInfo.screenshots.forEach((screenshot) => {
+        this.tableReports += `&nbsp;&nbsp;<img class="thumbImg" src="data:image/png;base64, ${fs.readFileSync(screenshot.screenshotPath, { encoding: 'base64' })}"/>`;
+      });
+      this.tableReports += '</td>\n';
+    } else {
+      this.tableReports += this.indentString('<td>', 2);
+      this.tableReports += '&nbsp;';
+      this.tableReports += '</td>\n';
+    }
 
     this.tableReports += this.indentString('</tr>\n');
   },
@@ -206,6 +217,7 @@ module.exports = () => ({
             <th>Browsers</th>
             <th>Duration</th>
             <th>Result</th>
+            <th>Screenshots</th>
           </tr>
         </thead>
         <tbody>
@@ -213,6 +225,7 @@ module.exports = () => ({
         </tbody>
         <thead>
           <tr>
+            <th></th>
             <th></th>
             <th></th>
             <th></th>
