@@ -19,7 +19,8 @@
   "main": "lib/index",
   "scripts": {
     "test": "cross-env NODE_ENV=test gulp build && cross-env NODE_ENV=test gulp test",
-    "lint": "eslint --fix ."
+    "lint": "eslint --fix .",
+    "prepare": "gulp build"
   },
   "standard-version": {
     "scripts": {
